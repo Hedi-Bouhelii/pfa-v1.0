@@ -1,0 +1,714 @@
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"4","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748032738,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Processing student authentication
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Student found - Data: {"student_id":1}
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Password verified (plaintext)
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Authentication successful, setting session data
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Setting redirect for reservation - Data: "reserve_project.php?id=4"
+[23-May-2025 22:42:43 Europe/Berlin] 2025-05-23 22:42:43 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=4"}}
+[23-May-2025 22:48:16 Europe/Berlin] 2025-05-23 22:48:16 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"4","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748032963,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:48:16 Europe/Berlin] 2025-05-23 22:48:16 - Processing student authentication
+[23-May-2025 22:48:16 Europe/Berlin] 2025-05-23 22:48:16 - Student found - Data: {"student_id":1}
+[23-May-2025 22:48:16 Europe/Berlin] 2025-05-23 22:48:16 - Password verification failed
+[23-May-2025 22:48:16 Europe/Berlin] 2025-05-23 22:48:16 - Authentication error - Data: "Invalid password for matricule S001"
+[23-May-2025 22:48:16 Europe/Berlin] 2025-05-23 22:48:16 - Sending response - Data: {"success":false,"message":"Invalid password for matricule S001","data":[]}
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"4","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748032963,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Processing student authentication
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Student found - Data: {"student_id":1}
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Password verified (plaintext)
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Authentication successful, setting session data
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Setting redirect for reservation - Data: "reserve_project.php?id=4"
+[23-May-2025 22:48:18 Europe/Berlin] 2025-05-23 22:48:18 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=4"}}
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"4","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748033298,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Processing student authentication
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Student found - Data: {"student_id":1}
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Password verified (plaintext)
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Authentication successful, setting session data
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Setting redirect for reservation - Data: "reserve_project.php?id=4"
+[23-May-2025 22:48:39 Europe/Berlin] 2025-05-23 22:48:39 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=4"}}
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"4","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748033319,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Processing student authentication
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Student found - Data: {"student_id":1}
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Password verified (plaintext)
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Authentication successful, setting session data
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Setting redirect for reservation - Data: "reserve_project.php?id=4"
+[23-May-2025 22:51:49 Europe/Berlin] 2025-05-23 22:51:49 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=4"}}
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"4","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748033509,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Processing student authentication
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Student found - Data: {"student_id":1}
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Password verified (plaintext)
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Authentication successful, setting session data
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Setting redirect for reservation - Data: "reserve_project.php?id=4"
+[23-May-2025 22:52:11 Europe/Berlin] 2025-05-23 22:52:11 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=4"}}
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748033531,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Processing student authentication
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Student found - Data: {"student_id":1}
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Password verified (plaintext)
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Authentication successful, setting session data
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 22:55:57 Europe/Berlin] Preparing response with data: Array
+(
+    [success] => 1
+    [message] => Authentication successful
+    [data] => Array
+        (
+            [user] => Array
+                (
+                    [matricule] => S001
+                    [nom] => BENJELLOUN
+                    [prenom] => Amine
+                )
+
+            [redirect] => reserve_project.php?id=3
+        )
+
+)
+
+[23-May-2025 22:55:57 Europe/Berlin] 2025-05-23 22:55:57 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=3"}}
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748033757,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Processing student authentication
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Student found - Data: {"student_id":1}
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Password verified (plaintext)
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Authentication successful, setting session data
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:00:05 Europe/Berlin] Preparing response with data: Array
+(
+    [success] => 1
+    [message] => Authentication successful
+    [data] => Array
+        (
+            [user] => Array
+                (
+                    [matricule] => S001
+                    [nom] => BENJELLOUN
+                    [prenom] => Amine
+                )
+
+            [redirect] => reserve_project.php?id=3
+        )
+
+)
+
+[23-May-2025 23:00:05 Europe/Berlin] 2025-05-23 23:00:05 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=3"}}
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034005,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Processing student authentication
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Student found - Data: {"student_id":1}
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Password verified (plaintext)
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Authentication successful, setting session data
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:08:27 Europe/Berlin] Preparing response with data: Array
+(
+    [success] => 1
+    [message] => Authentication successful
+    [data] => Array
+        (
+            [user] => Array
+                (
+                    [matricule] => S001
+                    [nom] => BENJELLOUN
+                    [prenom] => Amine
+                )
+
+            [redirect] => reserve_project.php?id=3
+        )
+
+)
+
+[23-May-2025 23:08:27 Europe/Berlin] 2025-05-23 23:08:27 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=3"}}
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034507,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Processing student authentication
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Student found - Data: {"student_id":1}
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Password verified (plaintext)
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Authentication successful, setting session data
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:09:56 Europe/Berlin] Preparing response with data: Array
+(
+    [success] => 1
+    [message] => Authentication successful
+    [data] => Array
+        (
+            [user] => Array
+                (
+                    [matricule] => S001
+                    [nom] => BENJELLOUN
+                    [prenom] => Amine
+                )
+
+            [redirect] => reserve_project.php?id=3
+        )
+
+)
+
+[23-May-2025 23:09:56 Europe/Berlin] 2025-05-23 23:09:56 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=3"}}
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034596,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Processing student authentication
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Student found - Data: {"student_id":1}
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Password verified (plaintext)
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Authentication successful, setting session data
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:10:18 Europe/Berlin] Preparing response with data: Array
+(
+    [success] => 1
+    [message] => Authentication successful
+    [data] => Array
+        (
+            [user] => Array
+                (
+                    [matricule] => S001
+                    [nom] => BENJELLOUN
+                    [prenom] => Amine
+                )
+
+            [redirect] => reserve_project.php?id=3
+        )
+
+)
+
+[23-May-2025 23:10:18 Europe/Berlin] 2025-05-23 23:10:18 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=3"}}
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034618,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Processing student authentication
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Student found - Data: {"student_id":1}
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Password verified (plaintext)
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Authentication successful, setting session data
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:10:35 Europe/Berlin] Preparing response with data: Array
+(
+    [success] => 1
+    [message] => Authentication successful
+    [data] => Array
+        (
+            [user] => Array
+                (
+                    [matricule] => S001
+                    [nom] => BENJELLOUN
+                    [prenom] => Amine
+                )
+
+            [redirect] => reserve_project.php?id=3
+        )
+
+)
+
+[23-May-2025 23:10:35 Europe/Berlin] 2025-05-23 23:10:35 - Sending response - Data: {"success":true,"message":"Authentication successful","data":{"user":{"matricule":"S001","nom":"BENJELLOUN","prenom":"Amine"},"redirect":"reserve_project.php?id=3"}}
+[23-May-2025 23:13:02 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:13:02 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748034635
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:13:02 Europe/Berlin] 2025-05-23 23:13:02 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034635,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:13:02 Europe/Berlin] 2025-05-23 23:13:02 - Processing student authentication
+[23-May-2025 23:13:02 Europe/Berlin] 2025-05-23 23:13:02 - Student found - Data: {"student_id":1}
+[23-May-2025 23:13:02 Europe/Berlin] 2025-05-23 23:13:02 - Password verified (plaintext)
+[23-May-2025 23:13:02 Europe/Berlin] 2025-05-23 23:13:02 - Authentication successful, setting session data
+[23-May-2025 23:13:02 Europe/Berlin] 2025-05-23 23:13:02 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:13:16 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:13:16 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748034782
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:13:16 Europe/Berlin] 2025-05-23 23:13:16 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034782,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:13:16 Europe/Berlin] 2025-05-23 23:13:16 - Processing student authentication
+[23-May-2025 23:13:16 Europe/Berlin] 2025-05-23 23:13:16 - Student found - Data: {"student_id":1}
+[23-May-2025 23:13:16 Europe/Berlin] 2025-05-23 23:13:16 - Password verified (plaintext)
+[23-May-2025 23:13:16 Europe/Berlin] 2025-05-23 23:13:16 - Authentication successful, setting session data
+[23-May-2025 23:13:16 Europe/Berlin] 2025-05-23 23:13:16 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:13:31 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:13:31 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748034796
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:13:31 Europe/Berlin] 2025-05-23 23:13:31 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034796,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:13:31 Europe/Berlin] 2025-05-23 23:13:31 - Processing student authentication
+[23-May-2025 23:13:31 Europe/Berlin] 2025-05-23 23:13:31 - Student found - Data: {"student_id":1}
+[23-May-2025 23:13:31 Europe/Berlin] 2025-05-23 23:13:31 - Password verified (plaintext)
+[23-May-2025 23:13:31 Europe/Berlin] 2025-05-23 23:13:31 - Authentication successful, setting session data
+[23-May-2025 23:13:31 Europe/Berlin] 2025-05-23 23:13:31 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:13:43 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:13:43 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748034811
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:13:43 Europe/Berlin] 2025-05-23 23:13:43 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034811,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:13:43 Europe/Berlin] 2025-05-23 23:13:43 - Processing student authentication
+[23-May-2025 23:13:43 Europe/Berlin] 2025-05-23 23:13:43 - Student found - Data: {"student_id":1}
+[23-May-2025 23:13:43 Europe/Berlin] 2025-05-23 23:13:43 - Password verified (plaintext)
+[23-May-2025 23:13:43 Europe/Berlin] 2025-05-23 23:13:43 - Authentication successful, setting session data
+[23-May-2025 23:13:43 Europe/Berlin] 2025-05-23 23:13:43 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:14:02 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:14:02 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748034823
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:14:02 Europe/Berlin] 2025-05-23 23:14:02 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034823,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:14:02 Europe/Berlin] 2025-05-23 23:14:02 - Processing student authentication
+[23-May-2025 23:14:02 Europe/Berlin] 2025-05-23 23:14:02 - Student found - Data: {"student_id":1}
+[23-May-2025 23:14:02 Europe/Berlin] 2025-05-23 23:14:02 - Password verified (plaintext)
+[23-May-2025 23:14:02 Europe/Berlin] 2025-05-23 23:14:02 - Authentication successful, setting session data
+[23-May-2025 23:14:02 Europe/Berlin] 2025-05-23 23:14:02 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:17:50 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:17:50 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748034842
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:17:50 Europe/Berlin] 2025-05-23 23:17:50 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748034842,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:17:50 Europe/Berlin] 2025-05-23 23:17:50 - Processing student authentication
+[23-May-2025 23:17:50 Europe/Berlin] 2025-05-23 23:17:50 - Student found - Data: {"student_id":1}
+[23-May-2025 23:17:50 Europe/Berlin] 2025-05-23 23:17:50 - Password verified (plaintext)
+[23-May-2025 23:17:50 Europe/Berlin] 2025-05-23 23:17:50 - Authentication successful, setting session data
+[23-May-2025 23:17:50 Europe/Berlin] 2025-05-23 23:17:50 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:18:22 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:18:22 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035070
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:18:22 Europe/Berlin] 2025-05-23 23:18:22 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035070,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:18:22 Europe/Berlin] 2025-05-23 23:18:22 - Processing student authentication
+[23-May-2025 23:18:22 Europe/Berlin] 2025-05-23 23:18:22 - Student found - Data: {"student_id":1}
+[23-May-2025 23:18:22 Europe/Berlin] 2025-05-23 23:18:22 - Password verified (plaintext)
+[23-May-2025 23:18:22 Europe/Berlin] 2025-05-23 23:18:22 - Authentication successful, setting session data
+[23-May-2025 23:18:22 Europe/Berlin] 2025-05-23 23:18:22 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:18:33 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:18:33 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035102
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:18:33 Europe/Berlin] 2025-05-23 23:18:33 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035102,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:18:33 Europe/Berlin] 2025-05-23 23:18:33 - Processing student authentication
+[23-May-2025 23:18:33 Europe/Berlin] 2025-05-23 23:18:33 - Student found - Data: {"student_id":1}
+[23-May-2025 23:18:33 Europe/Berlin] 2025-05-23 23:18:33 - Password verification failed
+[23-May-2025 23:18:33 Europe/Berlin] 2025-05-23 23:18:33 - Authentication error - Data: "Invalid password for matricule S001"
+[23-May-2025 23:18:48 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:18:48 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035102
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:18:48 Europe/Berlin] 2025-05-23 23:18:48 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035102,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:18:48 Europe/Berlin] 2025-05-23 23:18:48 - Processing student authentication
+[23-May-2025 23:18:48 Europe/Berlin] 2025-05-23 23:18:48 - Student found - Data: {"student_id":1}
+[23-May-2025 23:18:48 Europe/Berlin] 2025-05-23 23:18:48 - Password verified (plaintext)
+[23-May-2025 23:18:48 Europe/Berlin] 2025-05-23 23:18:48 - Authentication successful, setting session data
+[23-May-2025 23:18:48 Europe/Berlin] 2025-05-23 23:18:48 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:19:05 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:19:05 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035128
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:19:05 Europe/Berlin] 2025-05-23 23:19:05 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035128,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:19:05 Europe/Berlin] 2025-05-23 23:19:05 - Processing student authentication
+[23-May-2025 23:19:05 Europe/Berlin] 2025-05-23 23:19:05 - Student found - Data: {"student_id":1}
+[23-May-2025 23:19:05 Europe/Berlin] 2025-05-23 23:19:05 - Password verified (plaintext)
+[23-May-2025 23:19:05 Europe/Berlin] 2025-05-23 23:19:05 - Authentication successful, setting session data
+[23-May-2025 23:19:05 Europe/Berlin] 2025-05-23 23:19:05 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:19:12 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:19:12 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035145
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:19:12 Europe/Berlin] 2025-05-23 23:19:12 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035145,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:19:12 Europe/Berlin] 2025-05-23 23:19:12 - Processing student authentication
+[23-May-2025 23:19:12 Europe/Berlin] 2025-05-23 23:19:12 - Student found - Data: {"student_id":1}
+[23-May-2025 23:19:12 Europe/Berlin] 2025-05-23 23:19:12 - Password verification failed
+[23-May-2025 23:19:12 Europe/Berlin] 2025-05-23 23:19:12 - Authentication error - Data: "Invalid password for matricule S001"
+[23-May-2025 23:19:19 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:19:19 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035145
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:19:19 Europe/Berlin] 2025-05-23 23:19:19 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035145,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:19:19 Europe/Berlin] 2025-05-23 23:19:19 - Processing student authentication
+[23-May-2025 23:19:19 Europe/Berlin] 2025-05-23 23:19:19 - Student found - Data: {"student_id":1}
+[23-May-2025 23:19:19 Europe/Berlin] 2025-05-23 23:19:19 - Password verified (plaintext)
+[23-May-2025 23:19:19 Europe/Berlin] 2025-05-23 23:19:19 - Authentication successful, setting session data
+[23-May-2025 23:19:19 Europe/Berlin] 2025-05-23 23:19:19 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:19:30 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:19:30 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035159
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:19:30 Europe/Berlin] 2025-05-23 23:19:30 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035159,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:19:30 Europe/Berlin] 2025-05-23 23:19:30 - Processing student authentication
+[23-May-2025 23:19:30 Europe/Berlin] 2025-05-23 23:19:30 - Student found - Data: {"student_id":1}
+[23-May-2025 23:19:30 Europe/Berlin] 2025-05-23 23:19:30 - Password verified (plaintext)
+[23-May-2025 23:19:30 Europe/Berlin] 2025-05-23 23:19:30 - Authentication successful, setting session data
+[23-May-2025 23:19:30 Europe/Berlin] 2025-05-23 23:19:30 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:19:44 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:19:44 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035170
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:19:44 Europe/Berlin] 2025-05-23 23:19:44 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035170,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:19:44 Europe/Berlin] 2025-05-23 23:19:44 - Processing student authentication
+[23-May-2025 23:19:44 Europe/Berlin] 2025-05-23 23:19:44 - Student found - Data: {"student_id":1}
+[23-May-2025 23:19:44 Europe/Berlin] 2025-05-23 23:19:44 - Password verified (plaintext)
+[23-May-2025 23:19:44 Europe/Berlin] 2025-05-23 23:19:44 - Authentication successful, setting session data
+[23-May-2025 23:19:44 Europe/Berlin] 2025-05-23 23:19:44 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:19:55 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:19:55 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035184
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:19:55 Europe/Berlin] 2025-05-23 23:19:55 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035184,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:19:55 Europe/Berlin] 2025-05-23 23:19:55 - Processing student authentication
+[23-May-2025 23:19:55 Europe/Berlin] 2025-05-23 23:19:55 - Student found - Data: {"student_id":1}
+[23-May-2025 23:19:55 Europe/Berlin] 2025-05-23 23:19:55 - Password verified (plaintext)
+[23-May-2025 23:19:55 Europe/Berlin] 2025-05-23 23:19:55 - Authentication successful, setting session data
+[23-May-2025 23:19:55 Europe/Berlin] 2025-05-23 23:19:55 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:20:04 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:20:04 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035195
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:20:04 Europe/Berlin] 2025-05-23 23:20:04 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035195,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:20:04 Europe/Berlin] 2025-05-23 23:20:04 - Processing student authentication
+[23-May-2025 23:20:04 Europe/Berlin] 2025-05-23 23:20:04 - Student found - Data: {"student_id":1}
+[23-May-2025 23:20:04 Europe/Berlin] 2025-05-23 23:20:04 - Password verified (plaintext)
+[23-May-2025 23:20:04 Europe/Berlin] 2025-05-23 23:20:04 - Authentication successful, setting session data
+[23-May-2025 23:20:04 Europe/Berlin] 2025-05-23 23:20:04 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:20:11 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:20:11 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035204
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:20:11 Europe/Berlin] 2025-05-23 23:20:11 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035204,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:20:11 Europe/Berlin] 2025-05-23 23:20:11 - Processing student authentication
+[23-May-2025 23:20:11 Europe/Berlin] 2025-05-23 23:20:11 - Student found - Data: {"student_id":1}
+[23-May-2025 23:20:11 Europe/Berlin] 2025-05-23 23:20:11 - Password verified (plaintext)
+[23-May-2025 23:20:11 Europe/Berlin] 2025-05-23 23:20:11 - Authentication successful, setting session data
+[23-May-2025 23:20:11 Europe/Berlin] 2025-05-23 23:20:11 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:20:21 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:20:21 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035211
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:20:21 Europe/Berlin] 2025-05-23 23:20:21 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035211,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:20:21 Europe/Berlin] 2025-05-23 23:20:21 - Processing student authentication
+[23-May-2025 23:20:21 Europe/Berlin] 2025-05-23 23:20:21 - Student found - Data: {"student_id":1}
+[23-May-2025 23:20:21 Europe/Berlin] 2025-05-23 23:20:21 - Password verified (plaintext)
+[23-May-2025 23:20:21 Europe/Berlin] 2025-05-23 23:20:21 - Authentication successful, setting session data
+[23-May-2025 23:20:21 Europe/Berlin] 2025-05-23 23:20:21 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:21:35 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:21:35 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035221
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:21:35 Europe/Berlin] 2025-05-23 23:21:35 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035221,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:21:35 Europe/Berlin] 2025-05-23 23:21:35 - Processing student authentication
+[23-May-2025 23:21:35 Europe/Berlin] 2025-05-23 23:21:35 - Student found - Data: {"student_id":1}
+[23-May-2025 23:21:35 Europe/Berlin] 2025-05-23 23:21:35 - Password verified (plaintext)
+[23-May-2025 23:21:35 Europe/Berlin] 2025-05-23 23:21:35 - Authentication successful, setting session data
+[23-May-2025 23:21:35 Europe/Berlin] 2025-05-23 23:21:35 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:24:22 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:24:22 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035295
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:24:22 Europe/Berlin] 2025-05-23 23:24:22 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035295,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:24:22 Europe/Berlin] 2025-05-23 23:24:22 - Processing student authentication
+[23-May-2025 23:24:22 Europe/Berlin] 2025-05-23 23:24:22 - Student found - Data: {"student_id":1}
+[23-May-2025 23:24:22 Europe/Berlin] 2025-05-23 23:24:22 - Password verified (plaintext)
+[23-May-2025 23:24:22 Europe/Berlin] 2025-05-23 23:24:22 - Authentication successful, setting session data
+[23-May-2025 23:24:22 Europe/Berlin] 2025-05-23 23:24:22 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
+[23-May-2025 23:33:34 Europe/Berlin] Raw POST data: 
+[23-May-2025 23:33:34 Europe/Berlin] Session at auth start: Array
+(
+    [user_id] => 3
+    [role] => eleve
+    [unit_name] => Academie Militaire
+    [action_user] => Array
+        (
+            [id] => 1
+            [matricule] => S001
+            [name] => Amine BENJELLOUN
+        )
+
+    [authenticated] => 1
+    [auth_time] => 1748035462
+    [authenticated_student] => 1
+    [student_matricule] => S001
+)
+
+[23-May-2025 23:33:34 Europe/Berlin] 2025-05-23 23:33:34 - Received authentication request - Data: {"matricule":"S001","action":"reserve","project_id":"3","session":{"user_id":3,"role":"eleve","unit_name":"Academie Militaire","action_user":{"id":1,"matricule":"S001","name":"Amine BENJELLOUN"},"authenticated":true,"auth_time":1748035462,"authenticated_student":1,"student_matricule":"S001"}}
+[23-May-2025 23:33:34 Europe/Berlin] 2025-05-23 23:33:34 - Processing student authentication
+[23-May-2025 23:33:34 Europe/Berlin] 2025-05-23 23:33:34 - Student found - Data: {"student_id":1}
+[23-May-2025 23:33:34 Europe/Berlin] 2025-05-23 23:33:34 - Password verified (plaintext)
+[23-May-2025 23:33:34 Europe/Berlin] 2025-05-23 23:33:34 - Authentication successful, setting session data
+[23-May-2025 23:33:34 Europe/Berlin] 2025-05-23 23:33:34 - Setting redirect for reservation - Data: "reserve_project.php?id=3"
