@@ -1,20 +1,19 @@
 <?php
 session_start();
 
-// Check if user is logged in and is a supervisor
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'encadrant') {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Verify authentication
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin' || !isset($_SESSION['authenticated_admin'])) {
+    header("Location: login.php");
     exit();
 }
 
-// Get POST data
-$data = json_decode(file_get_contents('php://input'), true);
-$project_id = $data['project_id'] ?? null;
-
-if (!$project_id) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Project ID is required']);
+// Verify POST request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: admin_dashboard.php");
     exit();
 }
 
@@ -22,55 +21,49 @@ if (!$project_id) {
 $db = new mysqli("localhost", "root", "", "militaryinstituteprojects");
 
 if ($db->connect_error) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Database connection failed']);
-    exit();
+    die("Connection failed: " . $db->connect_error);
 }
 
-// Check if project exists and belongs to this supervisor
+// Get project ID and verify it exists and has no reservations
+$project_id = intval($_POST['project_id']);
 $stmt = $db->prepare("
     SELECT p.*, COUNT(r.reservation_id) as reservation_count
     FROM Projet p
     LEFT JOIN Reservation r ON p.project_id = r.project_id
-    WHERE p.project_id = ? AND p.encadrant_id = ?
+    WHERE p.project_id = ?
     GROUP BY p.project_id
 ");
 
-$stmt->bind_param("ii", $project_id, $_SESSION['user_id']);
+$stmt->bind_param("i", $project_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $project = $result->fetch_assoc();
 
+// Verify project exists and has no reservations
 if (!$project) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Project not found or unauthorized']);
+    $_SESSION['error'] = "Project not found.";
+    header("Location: admin_dashboard.php");
     exit();
 }
 
-// Check if project has any reservations
 if ($project['reservation_count'] > 0) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Cannot delete a project that has reservations']);
+    $_SESSION['error'] = "Cannot delete a project that has reservations.";
+    header("Location: admin_dashboard.php");
     exit();
 }
 
-// Start transaction
-$db->begin_transaction();
+// Delete project
+$stmt = $db->prepare("DELETE FROM Projet WHERE project_id = ?");
+$stmt->bind_param("i", $project_id);
 
-try {
-    // Delete project
-    $stmt = $db->prepare("DELETE FROM Projet WHERE project_id = ?");
-    $stmt->bind_param("i", $project_id);
-    
-    if ($stmt->execute()) {
-        $db->commit();
-        header('Content-Type: application/json');
-        echo json_encode(['success' => true, 'message' => 'Project deleted successfully']);
-    } else {
-        throw new Exception('Failed to delete project');
-    }
-} catch (Exception $e) {
-    $db->rollback();
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Failed to delete project: ' . $e->getMessage()]);
-} 
+if ($stmt->execute()) {
+    $_SESSION['success'] = "Project deleted successfully.";
+} else {
+    $_SESSION['error'] = "Error deleting project: " . $stmt->error;
+}
+
+$stmt->close();
+$db->close();
+
+header("Location: admin_dashboard.php");
+exit(); 

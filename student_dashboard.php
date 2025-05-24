@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+// Add this at the top of the file after session_start()
+if (isset($_SESSION['authenticated_student']) && $_SESSION['authenticated_student'] !== $_SESSION['user_id']) {
+    // Clear the authentication data if it doesn't match the current user
+    unset($_SESSION['authenticated_student']);
+    unset($_SESSION['student_matricule']);
+    unset($_SESSION['action_user']);
+}
+
 // Debug information
 $debug_info = [
     'session' => $_SESSION,
@@ -96,6 +104,47 @@ $encadrants = $db->query($encadrants_query);
 if (!$encadrants) {
     die("Error in encadrants query: " . $db->error);
 }
+
+// Get counts for dashboard
+$student_id = $_SESSION['user_id'];
+
+// Count available projects
+$available_count = $db->query("SELECT COUNT(*) as count FROM Projet WHERE is_available = 1")->fetch_assoc()['count'];
+
+// Count reserved projects (including both as student1 and student2)
+$reserved_count = $db->query("
+    SELECT COUNT(*) as count 
+    FROM Reservation 
+    WHERE (student1_id = $student_id OR student2_id = $student_id)
+    AND is_approved IS NULL
+")->fetch_assoc()['count'];
+
+// Count approved projects
+$approved_count = $db->query("
+    SELECT COUNT(*) as count 
+    FROM Reservation 
+    WHERE (student1_id = $student_id OR student2_id = $student_id)
+    AND is_approved = 1
+")->fetch_assoc()['count'];
+
+// Count rejected projects
+$rejected_count = $db->query("
+    SELECT COUNT(*) as count 
+    FROM Reservation 
+    WHERE (student1_id = $student_id OR student2_id = $student_id)
+    AND is_approved = 0
+")->fetch_assoc()['count'];
+
+// Get student details
+$student_stmt = $db->prepare("
+    SELECT e.*, c.class_name 
+    FROM Etudiant e
+    LEFT JOIN Classe c ON e.class_id = c.class_id
+    WHERE e.student_id = ?
+");
+$student_stmt->bind_param("i", $student_id);
+$student_stmt->execute();
+$student = $student_stmt->get_result()->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -564,7 +613,7 @@ if (!$encadrants) {
                         </div>
                         
                         <!-- Quick Stats -->
-                        <div class="row">
+        <div class="row">
                             <?php
                             // Get available projects count
                             $available_query = "
@@ -650,7 +699,7 @@ if (!$encadrants) {
                                         </option>
                                     <?php endwhile; ?>
                                 </select>
-                            </div>
+            </div>
                             <div class="col-md-4">
                                 <label for="searchProject" class="form-label">Search</label>
                                 <div class="input-group">
@@ -661,7 +710,7 @@ if (!$encadrants) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
 
                     <!-- Projects Section -->
                     <div class="mb-5 animate__animated animate__fadeInUp">
@@ -676,17 +725,17 @@ if (!$encadrants) {
                                     data-title="<?php echo htmlspecialchars($project['titre']); ?>" 
                                     data-description="<?php echo htmlspecialchars($project['description']); ?>">
                                     <div class="card project-card h-100">
-                                        <div class="card-body">
+                                <div class="card-body">
                                             <span class="status-badge badge-<?php echo $project['project_status']; ?>">
-                                                <?php 
+                                        <?php 
                                                     echo ucfirst($project['project_status']);
                                                     if ($project['is_approved'] === 1) {
                                                         echo ' (Approved)';
                                                     } elseif ($project['is_approved'] === 0) {
                                                         echo ' (Rejected)';
                                                     }
-                                                ?>
-                                            </span>
+                                        ?>
+                                    </span>
                                             <h5 class="card-title"><?php echo htmlspecialchars($project['titre']); ?></h5>
                                             <p class="card-text"><?php echo htmlspecialchars(substr($project['description'], 0, 150)) . '...'; ?></p>
                                             <div class="project-meta">
@@ -706,10 +755,10 @@ if (!$encadrants) {
                                                     </a>
                                                 <?php endif; ?>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            <?php endwhile; ?>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
                         </div>
                     </div>
                 </div>
@@ -883,10 +932,13 @@ if (!$encadrants) {
                 spinner.classList.remove('d-none');
 
                 try {
-                    const formData = new FormData(authForm);
+                const formData = new FormData(authForm);
+                    // Add the current user's ID to ensure we're authenticating the right person
+                    formData.append('current_user_id', '<?php echo $_SESSION['user_id']; ?>');
+                
                     const response = await fetch('authenticate_action.php', {
-                        method: 'POST',
-                        body: formData
+                    method: 'POST',
+                    body: formData
                     });
 
                     const data = await response.json();
@@ -919,11 +971,11 @@ if (!$encadrants) {
                             window.location.href = redirectUrl;
                         }, 500);
                     } else {
-                        showToast(data.message || 'Authentication failed', 'danger');
+                        showToast(data.message || 'Authentication failed', 'error');
                     }
-                    
                 } catch (error) {
-                    showToast('Authentication failed: ' + error.message, 'danger');
+                    console.error('Error:', error);
+                    showToast('An error occurred during authentication', 'error');
                 } finally {
                     submitBtn.disabled = false;
                     spinner.classList.add('d-none');
@@ -1040,4 +1092,4 @@ if (!$encadrants) {
         });
     </script>
 </body>
-</html>
+</html> 

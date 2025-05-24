@@ -23,11 +23,33 @@ if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
 
-// Get project details
+// Get student details
+$student_stmt = $db->prepare("
+    SELECT e.*, c.class_name 
+    FROM Etudiant e
+    LEFT JOIN Classe c ON e.class_id = c.class_id
+    WHERE e.student_id = ?
+");
+$student_stmt->bind_param("i", $_SESSION['action_user']['id']);
+$student_stmt->execute();
+$student = $student_stmt->get_result()->fetch_assoc();
+
+// Get project details with enhanced information
 $stmt = $db->prepare("
-    SELECT p.*, e.nom as encadrant_nom, e.prenom as encadrant_prenom, e.grade as encadrant_grade
+    SELECT p.*, 
+           e.nom as encadrant_nom, e.prenom as encadrant_prenom, e.grade as encadrant_grade,
+           e.email as encadrant_email, e.phone as encadrant_phone,
+           s1.nom as student1_nom, s1.prenom as student1_prenom, s1.matricule as student1_matricule,
+           s2.nom as student2_nom, s2.prenom as student2_prenom, s2.matricule as student2_matricule,
+           c1.class_name as student1_class, c2.class_name as student2_class,
+           r.reservation_date, r.is_approved, r.approval_date, r.rejection_reason
     FROM Projet p
     LEFT JOIN Encadrant e ON p.encadrant_id = e.encadrant_id
+    LEFT JOIN Reservation r ON p.project_id = r.project_id
+    LEFT JOIN Etudiant s1 ON r.student1_id = s1.student_id
+    LEFT JOIN Etudiant s2 ON r.student2_id = s2.student_id
+    LEFT JOIN Classe c1 ON s1.class_id = c1.class_id
+    LEFT JOIN Classe c2 ON s2.class_id = c2.class_id
     WHERE p.project_id = ? AND p.is_available = 1
 ");
 $stmt->bind_param("i", $project_id);
@@ -114,6 +136,9 @@ $available_students = $students_stmt->get_result();
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
             --light-color: #ecf0f1;
             --dark-color: #2c3e50;
         }
@@ -121,6 +146,7 @@ $available_students = $students_stmt->get_result();
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
+            color: var(--dark-color);
         }
         
         .navbar {
@@ -132,17 +158,99 @@ $available_students = $students_stmt->get_result();
             font-weight: 600;
         }
         
-        .detail-card {
+        .user-menu {
+            position: relative;
+        }
+        
+        .user-menu .dropdown-menu {
+            min-width: 200px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .user-menu .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            color: var(--dark-color);
+        }
+        
+        .user-menu .dropdown-item i {
+            margin-right: 0.75rem;
+            color: var(--secondary-color);
+        }
+        
+        .user-menu .dropdown-item:hover {
+            background-color: var(--light-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
         
+        .user-info:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .user-details {
+            line-height: 1.2;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .user-class {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        .detail-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
         .detail-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+        
+        .card-body {
+            padding: 2rem;
         }
         
         .status-badge {
@@ -166,24 +274,48 @@ $available_students = $students_stmt->get_result();
         
         .badge-available {
             background-color: rgba(39, 174, 96, 0.15);
-            color: #27ae60;
+            color: var(--success-color);
+        }
+        
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
         .info-label {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-label i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
         }
         
         .info-value {
-            margin-bottom: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            padding-left: 1.75rem;
         }
         
         .form-section {
             background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-action {
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
         .btn-primary {
@@ -194,11 +326,7 @@ $available_students = $students_stmt->get_result();
         .btn-primary:hover {
             background-color: #2980b9;
             border-color: #2980b9;
-        }
-        
-        .form-select:focus, .form-control:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -208,24 +336,44 @@ $available_students = $students_stmt->get_result();
             <a class="navbar-brand" href="#">
                 <i class="bi bi-shield-lock"></i> Military Institute Projects
             </a>
-            <div class="d-flex">
-                <a href="student_dashboard.php" class="btn btn-outline-light btn-sm me-2">
-                    <i class="bi bi-arrow-left"></i> Dashboard
-                </a>
-                <a href="logout.php" class="btn btn-outline-light btn-sm">
-                    <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
+            <div class="d-flex align-items-center">
+                <div class="user-menu dropdown">
+                    <div class="user-info" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name"><?php echo htmlspecialchars($student['prenom'] . ' ' . $student['nom']); ?></div>
+                            <div class="user-class"><?php echo htmlspecialchars($student['class_name']); ?></div>
+                        </div>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="student_dashboard.php">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="logout.php">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="container py-4">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card detail-card mb-4">
+            <div class="col-lg-10">
+                <!-- Project Details Card -->
+                <div class="card detail-card">
+                    <div class="card-header">
+                        <h2 class="mb-0"><?php echo htmlspecialchars($project['titre']); ?></h2>
+                    </div>
                     <div class="card-body">
-                        <h2 class="card-title mb-3"><?php echo htmlspecialchars($project['titre']); ?></h2>
-                        
                         <div class="d-flex flex-wrap mb-4">
                             <span class="badge badge-team status-badge">
                                 <i class="bi bi-people"></i> <?php echo $project['nombre_eleves'] > 1 ? 'Group Project' : 'Individual Project'; ?>
@@ -235,49 +383,81 @@ $available_students = $students_stmt->get_result();
                             </span>
                         </div>
 
-                        <div class="mb-4">
-                            <h5 class="info-label">Description</h5>
+                        <div class="info-section">
+                            <h5 class="info-label"><i class="bi bi-file-text"></i> Description</h5>
                             <p class="info-value"><?php echo nl2br(htmlspecialchars($project['description'])); ?></p>
                         </div>
 
-                        <div class="mb-3">
-                            <h5 class="info-label">Supervisor</h5>
-                            <p class="info-value">
-                                <i class="bi bi-person"></i> <?php echo htmlspecialchars($project['encadrant_grade'] . ' ' . $project['encadrant_prenom'] . ' ' . $project['encadrant_nom']); ?>
-                            </p>
+                        <div class="info-section">
+                            <h5 class="info-label"><i class="bi bi-bullseye"></i> Objectives</h5>
+                            <p class="info-value"><?php echo nl2br(htmlspecialchars($project['objectif'])); ?></p>
                         </div>
-                    </div>
-                </div>
 
-                <div class="form-section">
-                    <h3 class="mb-4"><i class="bi bi-bookmark-check"></i> Reservation Form</h3>
-                    <form method="POST">
-                        <input type="hidden" name="project_id" value="<?php echo $project_id; ?>">
-                        
-                        <?php if ($project['nombre_eleves'] > 1): ?>
-                        <div class="mb-4">
-                            <label class="form-label info-label">Project Partner</label>
-                            <select class="form-select" name="student2_id">
-                                <option value="">No partner</option>
-                                <?php while($student = $available_students->fetch_assoc()): ?>
-                                    <option value="<?php echo $student['student_id']; ?>">
-                                        <?php echo htmlspecialchars($student['prenom'] . ' ' . $student['nom'] . ' (' . $student['matricule'] . ')'); ?>
-                                    </option>
-                                <?php endwhile; ?>
-                            </select>
-                            <small class="text-muted">Required for group projects</small>
+                        <div class="info-section">
+                            <h5 class="info-label"><i class="bi bi-graph-up"></i> Expected Results</h5>
+                            <p class="info-value"><?php echo nl2br(htmlspecialchars($project['resultats_attendus'])); ?></p>
+                        </div>
+
+                        <div class="info-section">
+                            <h5 class="info-label"><i class="bi bi-person-badge"></i> Supervisor</h5>
+                            <div class="info-value">
+                                <div class="student-info">
+                                    <strong><?php echo htmlspecialchars($project['encadrant_grade'] . ' ' . $project['encadrant_prenom'] . ' ' . $project['encadrant_nom']); ?></strong>
+                                    <?php if ($project['encadrant_email']): ?>
+                                        <div><i class="bi bi-envelope"></i> <?php echo htmlspecialchars($project['encadrant_email']); ?></div>
+                                    <?php endif; ?>
+                                    <?php if ($project['encadrant_phone']): ?>
+                                        <div><i class="bi bi-telephone"></i> <?php echo htmlspecialchars($project['encadrant_phone']); ?></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php if ($project['organisme'] || $project['address']): ?>
+                        <div class="info-section">
+                            <h5 class="info-label"><i class="bi bi-building"></i> Organization Details</h5>
+                            <div class="info-value">
+                                <?php if ($project['organisme']): ?>
+                                    <div><i class="bi bi-building"></i> <?php echo htmlspecialchars($project['organisme']); ?></div>
+                                <?php endif; ?>
+                                <?php if ($project['address']): ?>
+                                    <div><i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($project['address']); ?></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                         <?php endif; ?>
-                        
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-check-circle me-2"></i> Confirm Reservation
-                            </button>
-                            <a href="student_dashboard.php" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-left me-2"></i> Cancel
-                            </a>
+
+                        <div class="form-section">
+                            <h3 class="mb-4"><i class="bi bi-bookmark-check"></i> Reservation Form</h3>
+                            <form method="POST">
+                                <input type="hidden" name="project_id" value="<?php echo $project_id; ?>">
+                                
+                                <?php if ($project['nombre_eleves'] > 1): ?>
+                                <div class="mb-4">
+                                    <label class="form-label info-label">Project Partner</label>
+                                    <select class="form-select" name="student2_id">
+                                        <option value="">No partner</option>
+                                        <?php while($student = $available_students->fetch_assoc()): ?>
+                                            <option value="<?php echo $student['student_id']; ?>">
+                                                <?php echo htmlspecialchars($student['prenom'] . ' ' . $student['nom'] . ' (' . $student['matricule'] . ')'); ?>
+                                            </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                    <small class="text-muted">Required for group projects</small>
+                                </div>
+                                <?php endif; ?>
+                                
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-check-circle me-2"></i> Confirm Reservation
+                                    </button>
+                                    <a href="student_dashboard.php" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-left me-2"></i> Cancel
+                                    </a>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,21 +1,19 @@
 <?php
 session_start();
 
-// Check if user is logged in and is an admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Verify authentication
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin' || !isset($_SESSION['authenticated_admin'])) {
+    header("Location: login.php");
     exit();
 }
 
-// Get POST data
-$data = json_decode(file_get_contents('php://input'), true);
-$project_id = $data['project_id'] ?? null;
-$reason = $data['reason'] ?? null;
-
-if (!$project_id || !$reason) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Project ID and rejection reason are required']);
+// Verify POST request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: admin_dashboard.php");
     exit();
 }
 
@@ -23,80 +21,42 @@ if (!$project_id || !$reason) {
 $db = new mysqli("localhost", "root", "", "militaryinstituteprojects");
 
 if ($db->connect_error) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Database connection failed']);
-    exit();
+    die("Connection failed: " . $db->connect_error);
 }
 
-// Check if project has a pending reservation
+// Get reservation ID and verify it exists and is pending
+$reservation_id = intval($_POST['reservation_id']);
 $stmt = $db->prepare("
-    SELECT r.* 
+    SELECT r.*, p.project_id
     FROM Reservation r
-    WHERE r.project_id = ? AND r.is_approved IS NULL
+    JOIN Projet p ON r.project_id = p.project_id
+    WHERE r.reservation_id = ? AND r.status = 'pending'
 ");
 
-$stmt->bind_param("i", $project_id);
+$stmt->bind_param("i", $reservation_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $reservation = $result->fetch_assoc();
 
+// Verify reservation exists and is pending
 if (!$reservation) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'No pending reservation found for this project']);
+    $_SESSION['error'] = "Reservation not found or already processed.";
+    header("Location: admin_dashboard.php");
     exit();
 }
 
-// Start transaction
-$db->begin_transaction();
+// Update reservation status
+$stmt = $db->prepare("UPDATE Reservation SET status = 'rejected', updated_at = CURRENT_TIMESTAMP WHERE reservation_id = ?");
+$stmt->bind_param("i", $reservation_id);
 
-try {
-    // Update reservation status
-    $stmt = $db->prepare("
-        UPDATE Reservation 
-        SET is_approved = FALSE, 
-            rejection_reason = ?,
-            rejection_date = NOW(),
-            rejected_by = ?
-        WHERE project_id = ? AND is_approved IS NULL
-    ");
+if ($stmt->execute()) {
+    $_SESSION['success'] = "Reservation rejected successfully.";
+} else {
+    $_SESSION['error'] = "Error rejecting reservation: " . $stmt->error;
+}
 
-    $stmt->bind_param("sii", $reason, $_SESSION['user_id'], $project_id);
-    $stmt->execute();
+$stmt->close();
+$db->close();
 
-    // Make project available again
-    $stmt = $db->prepare("UPDATE Projet SET is_available = TRUE WHERE project_id = ?");
-    $stmt->bind_param("i", $project_id);
-    $stmt->execute();
-
-    // Get notification data
-    $stmt = $db->prepare("
-        SELECT 
-            p.encadrant_id,
-            e.email as encadrant_email,
-            s1.email as student1_email,
-            s2.email as student2_email
-        FROM Projet p
-        JOIN Encadrant e ON p.encadrant_id = e.encadrant_id
-        LEFT JOIN Reservation r ON p.project_id = r.project_id
-        LEFT JOIN Etudiant s1 ON r.student1_id = s1.student_id
-        LEFT JOIN Etudiant s2 ON r.student2_id = s2.student_id
-        WHERE p.project_id = ?
-    ");
-    
-    $stmt->bind_param("i", $project_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $notification_data = $result->fetch_assoc();
-
-    // TODO: Implement email notification system
-    // For now, we'll just commit the transaction
-
-    $db->commit();
-
-    header('Content-Type: application/json');
-    echo json_encode(['success' => true, 'message' => 'Project reservation rejected successfully']);
-} catch (Exception $e) {
-    $db->rollback();
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Failed to reject project reservation: ' . $e->getMessage()]);
-} 
+header("Location: admin_dashboard.php");
+exit(); 

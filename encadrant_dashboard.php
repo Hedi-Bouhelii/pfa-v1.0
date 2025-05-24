@@ -1,6 +1,22 @@
 <?php
 session_start();
 
+// Add this at the top of the file after session_start()
+if (isset($_SESSION['authenticated_encadrant']) && $_SESSION['authenticated_encadrant'] !== $_SESSION['user_id']) {
+    // Clear the authentication data if it doesn't match the current user
+    unset($_SESSION['authenticated_encadrant']);
+    unset($_SESSION['encadrant_matricule']);
+    unset($_SESSION['action_user']);
+}
+
+// Debug information
+$debug_info = [
+    'session' => $_SESSION,
+    'user_id' => $_SESSION['user_id'] ?? 'not set',
+    'role' => $_SESSION['role'] ?? 'not set',
+    'unit_name' => $_SESSION['unit_name'] ?? 'not set'
+];
+
 // Check if user is logged in and is an encadrant
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'encadrant' || !isset($_SESSION['unit_name'])) {
     header("Location: login.php");
@@ -343,16 +359,14 @@ if (!$unit_projects) {
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="me-3 text-end d-none d-sm-block">
-                            <div class="fw-semibold"><?php echo htmlspecialchars($encadrant_info['grade'] . ' ' . $encadrant_info['prenom'] . ' ' . $encadrant_info['nom']); ?></div>
-                            <div class="small text-light"><?php echo htmlspecialchars($encadrant_info['specialite']); ?></div>
+                            <div class="fw-semibold">Supervisor Dashboard</div>
+                            <div class="small text-light"><?php echo htmlspecialchars($_SESSION['unit_name']); ?></div>
                         </div>
                         <div class="user-avatar-small">
                             <i class="fas fa-user-tie"></i>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
                     </ul>
@@ -364,43 +378,34 @@ if (!$unit_projects) {
     <!-- Main Dashboard Content -->
     <div class="dashboard-container">
         <div class="container">
-            <div class="row">
+        <div class="row">
                 <!-- Sidebar Column -->
                 <div class="col-lg-4">
                     <div class="sidebar animate__animated animate__fadeInLeft">
                         <!-- Quick Actions -->
                         <h5 class="sidebar-title">
-                            <i class="bi bi-lightning-charge-fill"></i> Supervisor Actions
+                            <i class="bi bi-lightning-charge-fill"></i> Quick Actions
                         </h5>
                         <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action action-card" data-bs-toggle="modal" data-bs-target="#authModal" data-action="create_project">
+                            <a href="#" class="list-group-item list-group-item-action quick-action-item" data-bs-toggle="modal" data-bs-target="#authModal" data-action="my_projects">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-folder2-open action-icon"></i>
+                                    <div>
+                                        <div class="action-text">My Projects</div>
+                                        <small class="action-description">View and manage your own projects</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action quick-action-item" data-bs-toggle="modal" data-bs-target="#authModal" data-action="create_project">
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-plus-circle action-icon"></i>
                                     <div>
-                                        <div class="action-text">Proposer un projet</div>
-                                        <small class="action-description">Create a new project proposal</small>
+                                        <div class="action-text">Create New Project</div>
+                                        <small class="action-description">Add a new project to the system</small>
                                     </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action action-card" data-bs-toggle="modal" data-bs-target="#authModal" data-action="my_projects">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder action-icon"></i>
-                                    <div>
-                                        <div class="action-text">Mes projets</div>
-                                        <small class="action-description">View and manage your projects</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action action-card">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-calendar-check action-icon"></i>
-                                    <div>
-                                        <div class="action-text">Project Reviews</div>
-                                        <small class="action-description">Review student submissions</small>
-                                    </div>
-                                </div>
-                            </a>
                         </div>
+                            </a>
+                </div>
 
                         <!-- Unit Supervisors -->
                         <h5 class="sidebar-title mt-4">
@@ -414,7 +419,7 @@ if (!$unit_projects) {
                                             <i class="bi bi-person-circle" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
                                         </div>
                                         <div>
-                                            <h6 class="mb-1"><?php echo htmlspecialchars($encadrant['grade'] . ' ' . $encadrant['prenom'] . ' ' . $encadrant['nom']); ?></h6>
+                                        <h6 class="mb-1"><?php echo htmlspecialchars($encadrant['grade'] . ' ' . $encadrant['prenom'] . ' ' . $encadrant['nom']); ?></h6>
                                             <small class="text-muted"><?php echo htmlspecialchars($encadrant['specialite']); ?></small>
                                         </div>
                                     </div>
@@ -431,23 +436,23 @@ if (!$unit_projects) {
                     </h4>
                     
                     <div class="row animate__animated animate__fadeInUp">
-                        <?php while($project = $unit_projects->fetch_assoc()): ?>
-                            <div class="col-md-6 mb-4">
-                                <div class="card project-card">
-                                    <div class="card-body">
+                    <?php while($project = $unit_projects->fetch_assoc()): ?>
+                        <div class="col-md-6 mb-4">
+                            <div class="card project-card">
+                                <div class="card-body">
                                         <span class="status-badge <?php 
                                             echo $project['reservation_count'] > 0 ? 'badge-reserved' : 'badge-available'; 
                                         ?>">
                                             <?php echo $project['reservation_count'] > 0 ? 'Reserved' : 'Available'; ?>
                                         </span>
-                                        <h5 class="card-title"><?php echo htmlspecialchars($project['titre']); ?></h5>
-                                        <p class="card-text"><?php echo htmlspecialchars(substr($project['description'], 0, 100)) . '...'; ?></p>
+                                    <h5 class="card-title"><?php echo htmlspecialchars($project['titre']); ?></h5>
+                                    <p class="card-text"><?php echo htmlspecialchars(substr($project['description'], 0, 100)) . '...'; ?></p>
                                         
                                         <div class="project-meta">
                                             <strong>Supervisor:</strong> <?php echo htmlspecialchars($project['encadrant_grade'] . ' ' . $project['encadrant_prenom'] . ' ' . $project['encadrant_nom']); ?><br>
                                             <strong>Status:</strong> <?php echo $project['reservation_count'] > 0 ? $project['reservation_count'] . ' reservations' : 'Available'; ?>
-                                        </div>
-                                        
+                </div>
+
                                         <?php if($project['students']): ?>
                                             <div class="project-meta mt-2">
                                                 <strong>Students:</strong> <?php echo htmlspecialchars($project['students']); ?>
@@ -462,13 +467,13 @@ if (!$unit_projects) {
                                                 <a href="manage_project.php?id=<?php echo $project['project_id']; ?>" class="btn btn-manage btn-action">
                                                     <i class="bi bi-people-fill"></i> Manage
                                                 </a>
-                                            <?php endif; ?>
+                                    <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         <?php endwhile; ?>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -487,7 +492,6 @@ if (!$unit_projects) {
                 <div class="modal-body">
                     <form id="authForm">
                         <input type="hidden" id="action" name="action">
-                        <input type="hidden" id="projectId" name="project_id">
                         
                         <div class="mb-4 text-center">
                             <i class="bi bi-person-badge-fill" style="font-size: 3rem; color: var(--secondary-color);"></i>
@@ -525,11 +529,6 @@ if (!$unit_projects) {
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <small class="text-muted">
-                        <i class="bi bi-info-circle"></i> By authenticating, you agree to the Military Institute's security policies.
-                    </small>
-                </div>
             </div>
         </div>
     </div>
@@ -540,96 +539,139 @@ if (!$unit_projects) {
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Password visibility toggle
-            const togglePassword = document.getElementById('togglePassword');
-            const passwordInput = document.getElementById('password');
-            
-            togglePassword.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
-            });
-            
-            // Auth modal handling
+        // Auth modal handling
             const authModal = document.getElementById('authModal');
             const authForm = document.getElementById('authForm');
             const actionInput = document.getElementById('action');
-            const projectIdInput = document.getElementById('projectId');
             const authSubmit = document.getElementById('authSubmit');
-            
+
             authModal.addEventListener('show.bs.modal', function(event) {
                 const button = event.relatedTarget;
                 const action = button.getAttribute('data-action');
-                const projectId = button.getAttribute('data-project-id');
-                
-                actionInput.value = action;
-                if (projectId) {
-                    projectIdInput.value = projectId;
-                }
-                
-                // Update modal title based on action
-                let modalTitle = 'Authentication Required';
-                if (action === 'create_project') {
-                    modalTitle = 'Create Project - Authentication';
-                } else if (action === 'my_projects') {
-                    modalTitle = 'View Projects - Authentication';
-                }
-                
-                document.getElementById('authModalLabel').innerHTML = `
-                    <i class="bi bi-shield-lock me-2"></i> ${modalTitle}
-                `;
-            });
+            actionInput.value = action;
             
-            // Form submission handling
-            authSubmit.addEventListener('click', async function() {
-                try {
-                    const formData = new FormData(authForm);
-                    const action = formData.get('action');
-                    
-                    // Show loading state
-                    authSubmit.disabled = true;
-                    authSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Authenticating...';
-                    
-                    const response = await fetch('authenticate_action.php', {
-                        method: 'POST',
-                        body: formData
-                    });
+            // Update modal title based on action
+            let modalTitle = 'Authentication Required';
+            if (action === 'my_projects') {
+                modalTitle = 'View My Projects - Authentication';
+            } else if (action === 'create_project') {
+                modalTitle = 'Create New Project - Authentication';
+            }
+            
+            document.getElementById('authModalLabel').innerHTML = `
+                <i class="bi bi-shield-lock me-2"></i> ${modalTitle}
+            `;
+            });
 
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
+        // Form submission handling
+        authForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-                    const data = await response.json();
+            const submitBtn = authSubmit;
+            const spinner = submitBtn.querySelector('.spinner-border');
+            submitBtn.disabled = true;
+            spinner.classList.remove('d-none');
+
+            try {
+                const formData = new FormData(authForm);
+                // Add the current user's ID to ensure we're authenticating the right person
+                formData.append('current_user_id', '<?php echo $_SESSION['user_id']; ?>');
+                
+                console.log('Sending authentication request:', {
+                    action: formData.get('action'),
+                    matricule: formData.get('matricule')
+                });
+
+                const response = await fetch('authenticate_action.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                console.log('Authentication response:', data);
 
                     if (data.success) {
-                        // Close the modal
-                        const modal = bootstrap.Modal.getInstance(authModal);
+                    // Show success toast
+                    showToast('Authentication successful! Redirecting...', 'success');
+
+                    // Close modal immediately
+                    const modal = bootstrap.Modal.getInstance(authModal);
+                    if (modal) {
                         modal.hide();
-                        
-                        // Handle different actions
-                        switch(action) {
-                            case 'create_project':
-                                window.location.href = 'create_project.php';
-                                break;
-                            case 'my_projects':
-                                window.location.href = 'supervisor_projects.php';
-                                break;
-                            default:
-                                alert('Authentication successful!');
-                        }
-                    } else {
-                        alert('Authentication failed: ' + (data.message || 'Unknown error'));
                     }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Authentication failed: ' + error.message);
-                } finally {
-                    // Reset button state
-                    authSubmit.disabled = false;
-                    authSubmit.innerHTML = 'Authenticate';
-                }
-            });
+
+                    // Get the redirect URL from the response
+                    const redirectUrl = data.data.redirect;
+                    console.log('Redirect URL:', redirectUrl);
+
+                    // Force redirect with absolute URL
+                    window.location.replace(redirectUrl);
+                } else {
+                    showToast(data.message || 'Authentication failed', 'error');
+                    console.error('Authentication failed:', data.message);
+                    }
+            } catch (error) {
+                console.error('Error during authentication:', error);
+                showToast('An error occurred during authentication', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('d-none');
+            }
         });
+        
+        // Password visibility toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+                });
+            });
+
+    // Add toast notification function if not already present
+    function showToast(message, type = 'info') {
+        const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+        const toast = document.createElement('div');
+        toast.className = `toast show align-items-center text-white bg-${type} border-0`;
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        const bsToast = new bootstrap.Toast(toast, {
+            autohide: true,
+            delay: 3000
+        });
+        
+        bsToast.show();
+        
+        toast.addEventListener('hidden.bs.toast', () => {
+            toast.remove();
+        });
+    }
+
+    function createToastContainer() {
+        const container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.style.position = 'fixed';
+        container.style.top = '20px';
+        container.style.right = '20px';
+        container.style.zIndex = '1050';
+        document.body.appendChild(container);
+        return container;
+    }
     </script>
 </body>
-</html>
+</html> 

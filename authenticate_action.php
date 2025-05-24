@@ -39,6 +39,7 @@ $matricule = $_POST['matricule'] ?? '';
 $password = $_POST['password'] ?? '';
 $action = $_POST['action'] ?? '';
 $project_id = $_POST['project_id'] ?? '';
+$current_user_id = $_POST['current_user_id'] ?? '';
 
 if (empty($matricule) || empty($password) || empty($action)) {
     send_json_response(false, 'Missing required fields');
@@ -53,7 +54,7 @@ try {
                 SELECT e.*, u.unit_name 
                 FROM Etudiant e
                 JOIN Unit u ON e.unit_id = u.unit_id 
-                WHERE e.matricule = ? 
+                WHERE e.matricule = ?
             ");
             
             if (!$stmt) {
@@ -152,8 +153,20 @@ try {
                 throw new Exception("No supervisor found with matricule " . $matricule);
             }
 
-            // Verify password
-            if (password_verify($password, $encadrant['password_hash'])) {
+            // Verify password using both methods
+            $password_verified = false;
+            
+            // Try plaintext password first
+            if ($password === $encadrant['password_plaintext']) {
+                $password_verified = true;
+            }
+            // Try hashed password if plaintext fails
+            else if (password_verify($password, $encadrant['password_hash'])) {
+                $password_verified = true;
+            }
+            
+            if ($password_verified) {
+                // Set action-specific session data
                 $_SESSION['action_user'] = [
                     'id' => $encadrant['encadrant_id'],
                     'matricule' => $encadrant['matricule'],
@@ -162,20 +175,32 @@ try {
                 $_SESSION['authenticated'] = true;
                 $_SESSION['auth_time'] = time();
                 
-                // Set redirect based on action
-                $redirect = 'encadrant_dashboard.php';
+                // Store authentication in session
+                $_SESSION['authenticated_encadrant'] = $encadrant['encadrant_id'];
+                $_SESSION['encadrant_matricule'] = $matricule;
+                
+                // Prepare response data
+                $response_data = [
+                    'user' => [
+                        'matricule' => $encadrant['matricule'],
+                        'nom' => $encadrant['nom'],
+                        'prenom' => $encadrant['prenom']
+                    ]
+                ];
+                
+                // Add redirect URL based on action
                 if ($action === 'create_project') {
-                    $redirect = 'create_project.php';
+                    $response_data['redirect'] = 'create_project.php';
+                } else if ($action === 'my_projects') {
+                    $response_data['redirect'] = 'my_projects.php';
+                } else {
+                    throw new Exception("Invalid action for supervisor: " . $action);
                 }
                 
-                send_json_response(true, '', [
-                    'redirect' => $redirect,
-                    'debug' => [
-                        'matricule' => $matricule,
-                        'action' => $action,
-                        'project_id' => $project_id
-                    ]
-                ]);
+                // Log the response data for debugging
+                error_log("Supervisor authentication successful. Response data: " . print_r($response_data, true));
+                
+                send_json_response(true, 'Authentication successful', $response_data);
             } else {
                 throw new Exception("Invalid password for matricule " . $matricule);
             }
